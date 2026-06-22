@@ -22,7 +22,8 @@ public class ApiGatewayLoggingFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        log.info("Request received: [{}] '{}' ", request.getMethod(), request.getRequestURI());
+        String clientIp = request.getRemoteAddr();
+        log.info("Gateway Routing -> [{}] {} (IP: {})", request.getMethod(), request.getRequestURI(), clientIp);
         filterChain.doFilter(request, response);
     }
 }
